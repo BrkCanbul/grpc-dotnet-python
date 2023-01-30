@@ -95,7 +95,9 @@ class Program
         int choose = Convert.ToInt32(Console.ReadLine());
         
         if(choose == 1){
+            CancellationTokenSource tokenSource = new CancellationTokenSource();
             var planetask = client.getAllPlanes(new GetPlaneReq{Name = user.Name});
+            while(planetask.ResponseStream.MoveNext()){}
         }
         else if(choose == 2){
             throw new NotImplementedException("Option not implemented");
