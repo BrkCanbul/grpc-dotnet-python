@@ -81,8 +81,7 @@ class Program
 
         // var ch = GrpcChannel.ForAddress(ipAdress);
         // var client = new Plane.PlaneClient(ch);
-        while(true){
-            User user;
+        User user;
             while(true){
                 try{
                     System.Console.Write("please enter your user name : ");
@@ -99,6 +98,9 @@ class Program
                     continue;
                 }
             }
+            
+        while(true){
+            
             
             Plane.PlaneClient client = new Plane.PlaneClient(GrpcChannel.ForAddress(ipAdress));
             System.Console.WriteLine("Please choose one of below options");
