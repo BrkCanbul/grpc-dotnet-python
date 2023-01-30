@@ -72,56 +72,63 @@ class Program
 
         // var ch = GrpcChannel.ForAddress(ipAdress);
         // var client = new Plane.PlaneClient(ch);
-        User user;
         while(true){
-            try{
-                System.Console.WriteLine("please enter your user name");
-                string uName = Console.ReadLine();
-                string pass = Console.ReadLine();
-                user = new User(uName,pass);     
-                Login(user);
+            User user;
+            while(true){
+                try{
+                    System.Console.WriteLine("please enter your user name");
+                    string uName = Console.ReadLine();
+                    string pass = Console.ReadLine();
+                    user = new User(uName,pass);     
+                    Login(user);
+                    break;
+
+                } catch (Exception e){
+                    System.Console.WriteLine(e.Message.ToString());
+                    continue;
+                }
+            }
+            
+            Plane.PlaneClient client = new Plane.PlaneClient(GrpcChannel.ForAddress(ipAdress));
+            System.Console.WriteLine("Please choose one of below options");
+            System.Console.WriteLine("1-> List All planes");
+            System.Console.WriteLine("2-> Delete Plane");
+            System.Console.WriteLine("3-> Add Plane");
+            int choose = Convert.ToInt32(Console.ReadLine());
+            
+            if(choose == 1){
+                CancellationTokenSource tokenSource = new CancellationTokenSource();
+                var planetask = client.getAllPlanes(new GetPlaneReq{Name = user.Name});
+                System.Console.WriteLine("Planes:\n\n");
+                while( await planetask.ResponseStream.MoveNext(tokenSource.Token)){
+                    PlaneProto plane = new PlaneProto(planetask.ResponseStream.Current.Name,
+                    planetask.ResponseStream.Current.Height,planetask.ResponseStream.Current.Weight);
+
+                    System.Console.WriteLine(plane.ToString());
+                }
+
+            }
+            else if(choose == 2){
+                int toDel = Convert.ToInt32(Console.ReadLine());
+                var deltask = client.deletePlane(new delPlaneReq{Id=toDel});
+                System.Console.WriteLine($"server Responsed {deltask.RepMessage}");
+            }
+            else if(choose == 3){
+                System.Console.WriteLine("\n\nPlease Enter the name of plane : ");
+                string nm = Console.ReadLine();
+                System.Console.WriteLine("Please enter height of plane:");
+                int hg = Convert.ToInt32(Console.ReadLine());
+                System.Console.WriteLine("Please enter weight of plane:");
+                int wg = Convert.ToInt32(Console.ReadLine());
+                var pl = new PlaneProto(nm,hg,wg);
+                var addTask = client.AddPlane(pl.toAddRequest());
+                System.Console.WriteLine($"server responsed :{addTask.RespMessage}");
+            }
+            System.Console.WriteLine("Do you want to continue (Y/n)");
+            char continuer = Convert.ToChar(Console.ReadLine());
+            if(continuer == 'n' || continuer == 'N'){
                 break;
-
-            } catch (Exception e){
-                System.Console.WriteLine(e.Message.ToString());
-                continue;
             }
-        }
-        
-        Plane.PlaneClient client = new Plane.PlaneClient(GrpcChannel.ForAddress(ipAdress));
-        System.Console.WriteLine("Please choose one of below options");
-        System.Console.WriteLine("1-> List All planes");
-        System.Console.WriteLine("2-> Delete Plane");
-        System.Console.WriteLine("3-> Add Plane");
-        int choose = Convert.ToInt32(Console.ReadLine());
-        
-        if(choose == 1){
-            CancellationTokenSource tokenSource = new CancellationTokenSource();
-            var planetask = client.getAllPlanes(new GetPlaneReq{Name = user.Name});
-            System.Console.WriteLine("Planes:\n\n");
-            while( await planetask.ResponseStream.MoveNext(tokenSource.Token)){
-                PlaneProto plane = new PlaneProto(planetask.ResponseStream.Current.Name,
-                planetask.ResponseStream.Current.Height,planetask.ResponseStream.Current.Weight);
-
-                System.Console.WriteLine(plane.ToString());
-            }
-
-        }
-        else if(choose == 2){
-            int toDel = Convert.ToInt32(Console.ReadLine());
-            var deltask = client.deletePlane(new delPlaneReq{Id=toDel});
-            System.Console.WriteLine($"server Responsed {deltask.RepMessage}");
-        }
-        else if(choose == 3){
-            System.Console.WriteLine("\n\nPlease Enter the name of plane : ");
-            string nm = Console.ReadLine();
-            System.Console.WriteLine("Please enter height of plane:");
-            int hg = Convert.ToInt32(Console.ReadLine());
-            System.Console.WriteLine("Please enter weight of plane:");
-            int wg = Convert.ToInt32(Console.ReadLine());
-            var pl = new PlaneProto(nm,hg,wg);
-            var addTask = client.AddPlane(pl.toAddRequest());
-            System.Console.WriteLine($"server responsed :{addTask.RespMessage}");
         }
     }
 }
