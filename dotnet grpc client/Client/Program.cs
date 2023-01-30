@@ -24,8 +24,42 @@ class PlaneProto{
     
 }
 
+class User{
+    private string name;
+    private string password;
+    public string Name { get {
+        return name;
+    } set{
+        name = value;
+    }}
+    public string Password{
+        get{
+            return password;
+        }
+        set{
+            password = value;
+        }
+    }
+
+    public User()
+    {
+        name = " NOTSET ";
+        password = " NOTSET ";
+    }
+    public User(string name,string password){
+        this.name = name;
+        this.password = password;
+    }
+
+}
+
 class Program
 {
+    User[] users = {new User("brkCanbul","fsrTrasbond"),new User("sultanAhmet","gs1905"),new User("sultanFatih","trabzon1491")};
+    static bool Login(string name, string password){
+        foreach(user)
+        return false;
+    }
     
     static string ipAdress = "Http://localhost:50051";
     static async Task Main(string[] args)
