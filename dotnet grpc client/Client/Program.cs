@@ -105,16 +105,23 @@ class Program
 
                 System.Console.WriteLine(plane.ToString());
             }
-            System.Console.Clear();
 
         }
         else if(choose == 2){
             int toDel = Convert.ToInt32(Console.ReadLine());
             var deltask = client.deletePlane(new delPlaneReq{Id=toDel});
             System.Console.WriteLine($"server Responsed {deltask.RepMessage}");
-            Console.Clear();
         }
-        else if(choose == 3){        
+        else if(choose == 3){
+            System.Console.WriteLine("\n\nPlease Enter the name of plane : ");
+            string nm = Console.ReadLine();
+            System.Console.WriteLine("Please enter height of plane:");
+            int hg = Convert.ToInt32(Console.ReadLine());
+            System.Console.WriteLine("Please enter weight of plane:");
+            int wg = Convert.ToInt32(Console.ReadLine());
+            var pl = new PlaneProto(nm,hg,wg);
+            var addTask = client.AddPlane(pl.toAddRequest());
+            System.Console.WriteLine($"server responsed :{addTask.RespMessage}");
         }
     }
 }
