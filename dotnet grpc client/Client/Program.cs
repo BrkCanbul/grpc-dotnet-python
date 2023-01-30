@@ -57,9 +57,16 @@ class User{
 class Program
 {
     static User[] users = {new User("brkCanbul","fsrTrasbond"),new User("sultanAhmet","gs1905"),new User("sultanFatih","trabzon1491")};
-    static bool Login(User toLogin){
+    static bool  Login(User toLogin){
         foreach(User user in users){
             if( user.Name == toLogin.Name && user.Password == toLogin.Password ){
+                System.Console.WriteLine("connection succesfully");
+                for(int i = 0 ;i<100;i++){
+                    Console.Write("-");
+                    Task.Delay(10).Wait();
+                    
+                }
+                Console.WriteLine(">");
                 return true;
             }
         }
