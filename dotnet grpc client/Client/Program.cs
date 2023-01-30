@@ -34,5 +34,20 @@ class Program
         // var ch = GrpcChannel.ForAddress(ipAdress);
 
         // var client = new Plane.PlaneClient(ch);
+        Plane.PlaneClient client = new Plane.PlaneClient(GrpcChannel.ForAddress(ipAdress));
+        System.Console.WriteLine("Please choose one of below options");
+        System.Console.WriteLine("1-> List All planes");
+        System.Console.WriteLine("2-> Delete Plane");
+        System.Console.WriteLine("3-> Add Plane");
+        int choose = Convert.ToInt32(Console.ReadLine());
+        if(choose == 1){
+            throw new NotImplementedException("Option not implemented");
+        }
+        else if(choose == 2){
+            throw new NotImplementedException("Option not implemented");
+        }
+        else if(choose == 3){
+            throw new NotImplementedException("Option not implemented");
+        }
     }
 }
