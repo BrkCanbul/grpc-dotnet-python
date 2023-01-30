@@ -56,9 +56,9 @@ class User{
 class Program
 {
     static User[] users = {new User("brkCanbul","fsrTrasbond"),new User("sultanAhmet","gs1905"),new User("sultanFatih","trabzon1491")};
-    static bool Login(string name, string password){
+    static bool Login(User toLogin){
         foreach(User user in users){
-            if( user.Name == name && user.Password==password){
+            if( user.Name == toLogin.Name && user.Password == toLogin.Password ){
                 return true;
             }
         }
@@ -71,8 +71,20 @@ class Program
 
         // var ch = GrpcChannel.ForAddress(ipAdress);
         // var client = new Plane.PlaneClient(ch);
+        while(true){
+            try{
+                System.Console.WriteLine("please enter your user name");
+                string uName = Console.ReadLine();
+                string pass = Console.ReadLine();
+                User user = new User(uName,pass);     
+                Login(user);
+                break;
 
-
+            } catch (Exception e){
+                System.Console.WriteLine(e.Message.ToString());
+                continue;
+            }
+        }
         
         Plane.PlaneClient client = new Plane.PlaneClient(GrpcChannel.ForAddress(ipAdress));
         System.Console.WriteLine("Please choose one of below options");
