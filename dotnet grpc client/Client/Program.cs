@@ -63,7 +63,7 @@ class Program
                 return true;
             }
         }
-        throw new Exception("Wrong username or password\n\nPlease try again");
+        throw new Exception("Wrong username or password\nPlease try again");
     }
     
     static string ipAdress = "Http://localhost:50051";
@@ -76,13 +76,15 @@ class Program
             User user;
             while(true){
                 try{
-                    System.Console.WriteLine("please enter your user name");
+                    System.Console.Write("please enter your user name : ");
                     string uName = Console.ReadLine();
+                    System.Console.Write("Please enter your password  :");
                     string pass = Console.ReadLine();
                     user = new User(uName,pass);     
+                    Console.Clear();
                     Login(user);
                     break;
-
+                    
                 } catch (Exception e){
                     System.Console.WriteLine(e.Message.ToString());
                     continue;
