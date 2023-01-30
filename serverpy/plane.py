@@ -30,12 +30,10 @@ class PlaneServicer(planes_pb2_grpc.PlaneServicer):
         for item in planeList:
             yield item.toGetResp()
     def deletePlane(self, request:planes_pb2.delPlaneReq, context):
-        if len(planeList)>request.id or request.id<0:
-            print(request.id)
+        if len(planeList)<request.id:
             return planes_pb2.delPlaneRep(repMessage="Couldn't Fount plane with index")
         else:
-            print(request.id)
-            planeList.pop(request.id)
+            planeList.pop(request.id,)
             return planes_pb2.delPlaneRep(repMessage="Plane Succesfully Deleted")
 def serv():
     sv = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
