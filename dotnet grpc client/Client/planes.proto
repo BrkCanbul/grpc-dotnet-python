@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+option csharp_namespace ="Client";
+
+service Plane{
+    rpc AddPlane(PlaneAddReq) returns (PlaneAddResp) {}
+    rpc getAllPlanes(GetPlaneReq) returns (stream GetPlaneResp)  {}
+    rpc deletePlane(delPlaneReq) returns(delPlaneRep){}
+}
+
+
+message delPlaneReq{
+    int32 id =1;  
+}
+message delPlaneRep{
+    string repMessage=1;
+}
+
+message PlaneAddReq{
+    string name =1;
+    float height =2;
+    float weight =3;
+}
+
+message PlaneAddResp{
+    string respMessage =1;
+}
+
+message GetPlaneReq{
+    string name =1;
+}
+message GetPlaneResp{
+    string name=1;
+    float height =2;
+    float weight =3;
+}
