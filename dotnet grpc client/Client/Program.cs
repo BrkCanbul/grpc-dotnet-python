@@ -60,13 +60,15 @@ class Program
     static bool  Login(User toLogin){
         foreach(User user in users){
             if( user.Name == toLogin.Name && user.Password == toLogin.Password ){
-                System.Console.WriteLine("connection succesfully");
                 for(int i = 0 ;i<100;i++){
                     Console.Write("-");
                     Task.Delay(10).Wait();
-                    
+
                 }
                 Console.WriteLine(">");
+                Task.Delay(500).Wait();
+                System.Console.WriteLine("connected succesfully");
+                Task.Delay(500).Wait();
                 return true;
             }
         }
