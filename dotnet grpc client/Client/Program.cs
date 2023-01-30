@@ -97,7 +97,14 @@ class Program
         if(choose == 1){
             CancellationTokenSource tokenSource = new CancellationTokenSource();
             var planetask = client.getAllPlanes(new GetPlaneReq{Name = user.Name});
-            while(planetask.ResponseStream.MoveNext()){}
+            System.Console.WriteLine("Planes:\n\n");
+            while( await planetask.ResponseStream.MoveNext(tokenSource.Token)){
+                PlaneProto plane = new PlaneProto(planetask.ResponseStream.Current.Name,
+                planetask.ResponseStream.Current.Height,planetask.ResponseStream.Current.Weight);
+
+                System.Console.WriteLine(plane.ToString());
+
+            }
         }
         else if(choose == 2){
             throw new NotImplementedException("Option not implemented");
