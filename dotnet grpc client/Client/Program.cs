@@ -20,6 +20,7 @@ class PlaneProto{
         _height = height;
         _weight = weight;
     }
+    public PlaneAddReq toAddRequest() => new PlaneAddReq{Name =_name,Height =_height,Weight=_weight};
     public override string ToString()=> $"Plane name   : {_name}\nPlane height :  {_height}\nPlane weight :  {_height}\n";
     
 }
@@ -113,8 +114,7 @@ class Program
             System.Console.WriteLine($"server Responsed {deltask.RepMessage}");
             Console.Clear();
         }
-        else if(choose == 3){
-            throw new NotImplementedException("Option not implemented");
+        else if(choose == 3){        
         }
     }
 }
