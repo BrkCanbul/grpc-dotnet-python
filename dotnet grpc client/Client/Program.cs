@@ -98,7 +98,7 @@ class Program
                     continue;
                 }
             }
-            
+
         while(true){
             
             
@@ -123,6 +123,7 @@ class Program
             }
             else if(choose == 2){
                 int toDel = Convert.ToInt32(Console.ReadLine());
+                System.Console.WriteLine("please enter the index of the plane");
                 var deltask = client.deletePlane(new delPlaneReq{Id=toDel});
                 System.Console.WriteLine($"server Responsed {deltask.RepMessage}");
             }
