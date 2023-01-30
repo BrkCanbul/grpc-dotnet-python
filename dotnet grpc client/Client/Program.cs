@@ -105,10 +105,13 @@ class Program
                 System.Console.WriteLine(plane.ToString());
             }
             System.Console.Clear();
-            
+
         }
         else if(choose == 2){
-            throw new NotImplementedException("Option not implemented");
+            int toDel = Convert.ToInt32(Console.ReadLine());
+            var deltask = client.deletePlane(new delPlaneReq{Id=toDel});
+            System.Console.WriteLine($"server Responsed {deltask.RepMessage}");
+            Console.Clear();
         }
         else if(choose == 3){
             throw new NotImplementedException("Option not implemented");
