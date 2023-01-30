@@ -139,8 +139,8 @@ class Program
                 System.Console.WriteLine($"server responsed :{addTask.RespMessage}");
             }
             System.Console.WriteLine("Do you want to continue (Y/n)");
-            char continuer = Convert.ToChar(Console.ReadLine());
-            if(continuer == 'n' || continuer == 'N'){
+            string continuer =Console.ReadLine();
+            if(continuer[0] == 'n' || continuer[0] == 'N'){
                 break;
             }
         }
