@@ -103,8 +103,9 @@ class Program
                 planetask.ResponseStream.Current.Height,planetask.ResponseStream.Current.Weight);
 
                 System.Console.WriteLine(plane.ToString());
-
             }
+            System.Console.Clear();
+            
         }
         else if(choose == 2){
             throw new NotImplementedException("Option not implemented");
