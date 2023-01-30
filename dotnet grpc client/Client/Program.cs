@@ -131,10 +131,10 @@ class Program
                 System.Console.WriteLine("\n\nPlease Enter the name of plane : ");
                 string nm = Console.ReadLine();
                 System.Console.WriteLine("Please enter height of plane:");
-                int hg = Convert.ToInt32(Console.ReadLine());
+                double hg = Convert.ToDouble(Console.ReadLine());
                 System.Console.WriteLine("Please enter weight of plane:");
-                int wg = Convert.ToInt32(Console.ReadLine());
-                var pl = new PlaneProto(nm,hg,wg);
+                double wg = Convert.ToInt32(Console.ReadLine());
+                var pl = new PlaneProto(nm,float.Parse(hg.ToString()),float.Parse(wg.ToString()));
                 var addTask = client.AddPlane(pl.toAddRequest());
                 System.Console.WriteLine($"server responsed :{addTask.RespMessage}");
             }
