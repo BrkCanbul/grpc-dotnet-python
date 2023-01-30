@@ -92,6 +92,7 @@ class Program
         System.Console.WriteLine("2-> Delete Plane");
         System.Console.WriteLine("3-> Add Plane");
         int choose = Convert.ToInt32(Console.ReadLine());
+        
         if(choose == 1){
             throw new NotImplementedException("Option not implemented");
         }
