@@ -55,10 +55,14 @@ class User{
 
 class Program
 {
-    User[] users = {new User("brkCanbul","fsrTrasbond"),new User("sultanAhmet","gs1905"),new User("sultanFatih","trabzon1491")};
+    static User[] users = {new User("brkCanbul","fsrTrasbond"),new User("sultanAhmet","gs1905"),new User("sultanFatih","trabzon1491")};
     static bool Login(string name, string password){
-        foreach(user)
-        return false;
+        foreach(User user in users){
+            if( user.Name == name && user.Password==password){
+                return true;
+            }
+        }
+        throw new Exception("Wrong username or password\n\nPlease try again");
     }
     
     static string ipAdress = "Http://localhost:50051";
@@ -66,8 +70,10 @@ class Program
     {
 
         // var ch = GrpcChannel.ForAddress(ipAdress);
-
         // var client = new Plane.PlaneClient(ch);
+
+
+        
         Plane.PlaneClient client = new Plane.PlaneClient(GrpcChannel.ForAddress(ipAdress));
         System.Console.WriteLine("Please choose one of below options");
         System.Console.WriteLine("1-> List All planes");
