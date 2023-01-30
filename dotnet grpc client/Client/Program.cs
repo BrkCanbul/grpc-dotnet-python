@@ -71,12 +71,13 @@ class Program
 
         // var ch = GrpcChannel.ForAddress(ipAdress);
         // var client = new Plane.PlaneClient(ch);
+        User user;
         while(true){
             try{
                 System.Console.WriteLine("please enter your user name");
                 string uName = Console.ReadLine();
                 string pass = Console.ReadLine();
-                User user = new User(uName,pass);     
+                user = new User(uName,pass);     
                 Login(user);
                 break;
 
@@ -94,7 +95,7 @@ class Program
         int choose = Convert.ToInt32(Console.ReadLine());
         
         if(choose == 1){
-            throw new NotImplementedException("Option not implemented");
+            var planetask = client.getAllPlanes(new GetPlaneReq{Name = user.Name});
         }
         else if(choose == 2){
             throw new NotImplementedException("Option not implemented");
